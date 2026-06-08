@@ -23,15 +23,13 @@ public static class Installation
         bool steamShortcutCreated = false;
         Console.ResetColor();
 
-        if (chosenGame.Platform.Contains("Steam"))
-        {
-            steamShortcutCreated = Shortcut.Steam(scriptLocation, chosenGame.Root, chosenGame);
-        }
+        steamShortcutCreated = Shortcut.Steam(scriptLocation, chosenGame.Root, chosenGame);
 
         Shortcut.AddDesktop(scriptLocation, chosenGame, steamShortcutCreated, mmInstallationPath);
         CopyTimeout(chosenGame);
 
         // TODO: Add steam controller stuff for deck
+        SetupControllerForSteamDeck(steamShortcutCreated, chosenGame);
     }
 
     private static async Task<string> GetInstalledPath(Game chosenGame, string mmInstallationPath)
@@ -279,9 +277,38 @@ public static class Installation
         using FileStream fs = File.Create(endPath);
         rs.CopyTo(fs);
     }
+    
+    private static void SetupControllerForSteamDeck(bool steamShortcutCreated, Game chosenGame)
+    {
+        if (!AppEnvironment.DeckMode) return;
+        if (!steamShortcutCreated && chosenGame.AppId == "1698970154") return;
+
+        Console.WriteLine("Do you want to add controller config? (Y/Enter to confirm, N/Esc to cancel)");
+        
+        while (true)
+        {
+            ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.Y:
+                case ConsoleKey.Enter:
+                    Logger.Info("User opted for controller setup");
+                    //Sadly I dont know how the controller config work yet
+                    //Or have a way to really test it
+                    return;
+
+                case ConsoleKey.N:
+                case ConsoleKey.Escape:
+                    Logger.Info("User opted out of controller setup");
+                    return;
+            }
+        }
+    }
 
     private static void Fail(string message)
     {
+        Logger.Error(message);
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(message);
         Console.WriteLine("Press any key to exit");
