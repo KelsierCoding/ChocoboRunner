@@ -20,10 +20,9 @@ public static class Installation
 
         string scriptLocation = await CreateLauncherSh(chosenGame, chosenProton, mmInstallationPath);
 
-        bool steamShortcutCreated = false;
         Console.ResetColor();
 
-        steamShortcutCreated = Shortcut.Steam(scriptLocation, chosenGame.Root, chosenGame);
+        bool steamShortcutCreated = Shortcut.Steam(scriptLocation, chosenGame.Root, chosenGame);
 
         Shortcut.AddDesktop(scriptLocation, chosenGame, steamShortcutCreated, mmInstallationPath);
         CopyTimeout(chosenGame);
