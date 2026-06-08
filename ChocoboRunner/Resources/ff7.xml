@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AppLanguage>en</AppLanguage>
+  <SubscribedUrls>
+    <string>iros://Url/https$github.com/tsunamods-codes/7th-Heaven-Catalogs/releases/download/canary/qhimm.xml</string>
+    <string>iros://Url/https$github.com/tsunamods-codes/7th-Heaven-Catalogs/releases/download/canary/sega.xml</string>
+  </SubscribedUrls>
+  <ExtraFolders>
+    <string>ambient</string>
+    <string>direct</string>
+    <string>lighting</string>
+    <string>mesh</string>
+    <string>music</string>
+    <string>override</string>
+    <string>save</string>
+    <string>sfx</string>
+    <string>shaders</string>
+    <string>time</string>
+    <string>voice</string>
+    <string>widescreen</string>
+  </ExtraFolders>
+  <Subscriptions>
+    <Subscription>
+      <FailureCount>0</FailureCount>
+      <Url>iros://Url/https$github.com/tsunamods-codes/7th-Heaven-Catalogs/releases/download/canary/qhimm.xml</Url>
+      <Name>Qhimm Catalog</Name>
+    </Subscription>
+    <Subscription>
+      <FailureCount>0</FailureCount>
+      <Url>iros://Url/https$github.com/tsunamods-codes/7th-Heaven-Catalogs/releases/download/canary/sega.xml</Url>
+      <Name>Sega Catalog</Name>
+    </Subscription>
+  </Subscriptions>
+  <LibraryLocation>{MODLIBRARYPATH}</LibraryLocation>
+  <FF7Exe>{GAMEEXEPATH}</FF7Exe>
+  <FF7InstalledVersion>{PLATFORM}</FF7InstalledVersion>
+  <FFNxUpdateChannel>Stable</FFNxUpdateChannel>
+  <AppUpdateChannel>Stable</AppUpdateChannel>
+  <Options>
+    <GeneralOptions>AutoSortMods</GeneralOptions>
+    <GeneralOptions>AutoActiveNewMods</GeneralOptions>
+    <GeneralOptions>AutoImportMods</GeneralOptions>
+    <GeneralOptions>CheckForUpdates</GeneralOptions>
+    <GeneralOptions>OpenIrosLinksWith7H</GeneralOptions>
+    <GeneralOptions>OpenModFilesWith7H</GeneralOptions>
+  </Options>
+  <IntOptions>None</IntOptions>
+  <CurrentProfile>Default</CurrentProfile>
+  <MainWindow>
+    <X>400</X>
+    <Y>400</Y>
+    <W>1280</W>
+    <H>800</H>
+    <State>{WINDOWSTATE}</State>
+  </MainWindow>
+</Settings>

@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <SelfContained>true</SelfContained>
+        <PublishTrimmed>true</PublishTrimmed>
+        <PublishSingleFile>true</PublishSingleFile>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugType>embedded</DebugType>
+        <PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=./</PathMap>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\*.xml" />
+        <EmbeddedResource Include="Resources\timeout.exe" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Terminal.Gui" Version="2.4.4" />
+    </ItemGroup>
+
+    <Target Name="RenameOutputWithPlatform" AfterTargets="Publish" Condition="'$(RuntimeIdentifier)' != ''">
+        <PropertyGroup>
+            <IsWindows>false</IsWindows>
+            <IsWindows Condition="$(RuntimeIdentifier.StartsWith('win'))">true</IsWindows>
+
+            <FileExtension Condition="'$(IsWindows)' == 'true'">.exe</FileExtension>
+
+            <OriginalFile>$(PublishDir)$(TargetName)$(FileExtension)</OriginalFile>
+            <NewFile>$(PublishDir)$(TargetName)-$(RuntimeIdentifier)$(FileExtension)</NewFile>
+        </PropertyGroup>
+
+        <Move SourceFiles="$(OriginalFile)" DestinationFiles="$(NewFile)" Condition="Exists('$(OriginalFile)')" />
+    </Target>
+
+</Project>
